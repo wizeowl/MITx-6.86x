@@ -141,7 +141,12 @@ def perceptron(feature_matrix, labels, T):
     the feature matrix.
     """
     # Your code here
-    pass
+    theta = np.zeros_like(feature_matrix[0])
+    theta_0 = 0
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            (theta, theta_0) = perceptron_single_step_update(feature_matrix[i, :], labels[i], theta, theta_0)
+    return (theta, theta_0)
 
 
 # pragma: coderesponse end
