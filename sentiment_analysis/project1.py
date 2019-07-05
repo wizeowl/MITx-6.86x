@@ -70,7 +70,11 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     loss across all of the points in the feature matrix.
     """
     # Your code here
-    pass
+    n = labels.shape[0]
+    losses = [hinge_loss_single(feature_vector, label, theta, theta_0) for feature_vector, label in
+              zip(feature_matrix, labels)]
+
+    return sum(losses) / n
 
 
 # pragma: coderesponse end
