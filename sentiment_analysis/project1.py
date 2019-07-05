@@ -183,7 +183,19 @@ def average_perceptron(feature_matrix, labels, T):
     find a sum and divide.
     """
     # Your code here
-    pass
+    theta = np.zeros_like(feature_matrix[0])
+    theta_0 = 0
+    thetas = np.zeros_like(feature_matrix[0])
+    theta_0s = 0
+
+    n = T * feature_matrix.shape[0]
+
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            (theta, theta_0) = perceptron_single_step_update(feature_matrix[i, :], labels[i], theta, theta_0)
+            thetas += theta
+            theta_0s += theta_0
+    return (thetas / n, theta_0s / n)
 
 
 # pragma: coderesponse end
