@@ -276,7 +276,23 @@ def pegasos(feature_matrix, labels, T, L):
     parameter, found after T iterations through the feature matrix.
     """
     # Your code here
-    pass
+    theta = np.zeros_like(feature_matrix[0])
+    theta_0 = 0
+    count = 1
+    eta = 1
+    epsilon = np.finfo(float).eps
+
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            (updated_theta, updated_theta_0) = pegasos_single_step_update(feature_matrix[i], labels[i], L, eta, theta,
+                                                                          theta_0)
+            if (not np.all(theta - updated_theta < epsilon)) or (not np.allclose(theta_0, updated_theta_0)):
+                count += 1
+                eta = 1 / (count ** .5)
+                theta = updated_theta
+                theta_0 = updated_theta_0
+
+    return (theta, theta_0)
 
 
 # pragma: coderesponse end
