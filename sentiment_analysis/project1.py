@@ -104,7 +104,11 @@ def perceptron_single_step_update(
     completed.
     """
     # Your code here
-    pass
+    result = label * (current_theta @ feature_vector + current_theta_0)
+    if result < np.finfo(float).eps:
+        return (current_theta + label * feature_vector, current_theta_0 + label)
+
+    return (current_theta, current_theta_0)
 
 
 # pragma: coderesponse end
