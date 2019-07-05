@@ -40,7 +40,11 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     given data point and parameters.
     """
     # Your code here
-    pass
+    result = label * ((theta @ feature_vector) + theta_0)
+    if result < 1:
+        return 1 - result
+
+    return 0
 
 
 # pragma: coderesponse end
