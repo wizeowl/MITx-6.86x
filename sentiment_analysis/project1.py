@@ -359,7 +359,12 @@ def classifier_accuracy(
     accuracy of the trained classifier on the validation data.
     """
     # Your code here
-    pass
+    (theta, theta_0) = classifier(train_feature_matrix, train_labels, **kwargs)
+
+    train_predictions = classify(train_feature_matrix, theta, theta_0)
+    val_predictions = classify(val_feature_matrix, theta, theta_0)
+
+    return (accuracy(train_predictions, train_labels), accuracy(val_predictions, val_labels))
 
 
 # pragma: coderesponse end
