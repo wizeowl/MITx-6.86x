@@ -229,7 +229,17 @@ def pegasos_single_step_update(
     completed.
     """
     # Your code here
-    pass
+    hinge = label * (current_theta @ feature_vector + current_theta_0)
+    epsilon = np.finfo(float).eps
+
+    update_theta = (1 - eta * L) * current_theta
+    update_theta_0 = 0
+
+    if hinge - 1 <= epsilon:
+        update_theta += eta * label * feature_vector
+        update_theta_0 = label * eta
+
+    return (update_theta, current_theta_0 + update_theta_0)
 
 
 # pragma: coderesponse end
