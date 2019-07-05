@@ -319,7 +319,7 @@ def classify(feature_matrix, theta, theta_0):
     be considered a positive classification.
     """
     # Your code here
-    pass
+    return np.array([1 if score > 0 else -1 for score in feature_matrix @ theta + theta_0])
 
 
 # pragma: coderesponse end
