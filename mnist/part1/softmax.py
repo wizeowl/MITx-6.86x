@@ -58,7 +58,17 @@ def compute_cost_function(X, Y, theta, lambda_factor, temp_parameter):
         c - the cost value (scalar)
     """
     # YOUR CODE HERE
-    raise NotImplementedError
+    # n: Number of rows of
+    n = len(Y)
+    # Probabilities
+    P = np.clip(compute_probabilities(X, theta, temp_parameter), 1e-15, 1 - 1e-15)
+    # Selected Probabilities
+    S = np.choose(Y, P)
+    # Non-Regularization cost
+    NR = -1 / n * np.sum(np.log(S))
+    # R: Regularization cost
+    R = lambda_factor / 2 * np.sum(np.square(theta))
+    return NR + R
 
 
 def run_gradient_descent_iteration(X, Y, theta, alpha, lambda_factor, temp_parameter):
